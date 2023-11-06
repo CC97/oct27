@@ -1,0 +1,67 @@
+<p>admin works!</p>
+<div>
+  <h3>Create new user</h3>
+  <form #userForm="ngForm" (ngSubmit)="onSubmit()">
+    <div>
+      <label for="email">Email:</label>
+      <input
+        id="email"
+        type="email"
+        name="email"
+        [(ngModel)]="createUser.email"
+        required
+      />
+    </div>
+    <div>
+      <label for="name">Name:</label>
+      <input
+        id="name"
+        type="text"
+        name="name"
+        [(ngModel)]="createUser.name"
+        required
+      />
+    </div>
+    <div>
+      <label for="phone">Phone:</label>
+      <input
+        id="phone"
+        type="text"
+        name="phone"
+        [(ngModel)]="createUser.phone"
+        required
+      />
+    </div>
+    <button type="submit" [disabled]="!userForm.form.valid">Create User</button>
+  </form>
+</div>
+<div>
+  <h3>User update request</h3>
+  <div *ngFor="let update of updates; let i = index">
+    <div>
+      <span>ID: {{ update.id }}</span>
+      <span>UID: {{ update.uid }}</span>
+      <span>Email: {{ update.email }}</span>
+      <span>Password: {{ update.password }}</span>
+      <span>Name: {{ update.name }}</span>
+      <span>Phone: {{ update.phone }}</span>
+      <button (click)="onConfirm(update)">Confirm Update</button>
+      <button (click)="onDelete(update.id)">Delete Update</button>
+    </div>
+  </div>
+</div>
+
+<div>
+  <h3>Search users</h3>
+  <div>
+    <input type="text" #searchInput placeholder="Search users..." />
+    <button (click)="onSearch(searchInput.value)">Search</button>
+  </div>
+
+  <div *ngFor="let user of searchResults">
+    <div>ID: {{ user.id }}</div>
+    <div>Email: {{ user.email }}</div>
+    <div>Name: {{ user.name }}</div>
+    <div>Phone: {{ user.phone }}</div>
+  </div>
+</div>
